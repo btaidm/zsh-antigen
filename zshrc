@@ -1,16 +1,16 @@
 ZSHA_BASE=$HOME/.zsh-antigen
 source $ZSHA_BASE/antigen/antigen.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
 
 autoload -U compinit
 compinit
-
+setopt completealiases
 
 antigen-use oh-my-zsh
 
 antigen-bundle git
 antigen bundle git-extras
 antigen bundle archlinux
+antigen bundle command-not-found
 antigen-bundle zsh-users/zsh-syntax-highlighting
 antigen-bundle zsh-users/zsh-history-substring-search
 antigen-bundle tarruda/zsh-autosuggestions
@@ -24,6 +24,8 @@ antigen-bundle ascii-soup/zsh-url-highlighter
 antigen bundle knu/zsh-manydots-magic
 antigen-apply
 
+source $ZSHA_BASE/zkbd
+
 #zsh autosuggestions
 AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
 # Enable autosuggestions automatically.
@@ -34,9 +36,11 @@ zle -N zle-line-init
 
 alias cdu='cd-gitroot'
 
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-setopt completealiases
 alias ssh='TERM=xterm-256color ssh'
+if ! type lesspipe.sh > /dev/null; then
+	LESSOPEN="|/usr/local/bin/lesspipe.sh %s"; export LESSOPEN
+fi
 
+if ! type keychain > /dev/null; then
+	eval `keychain --eval`
+fi
