@@ -45,3 +45,8 @@ fi
 if type keychain > /dev/null; then
 	eval `keychain --eval`
 fi
+
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  __vte_osc7
+fi
