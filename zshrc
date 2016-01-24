@@ -50,3 +50,6 @@ if [[ $TERM == xterm-termite ]]; then
   . /etc/profile.d/vte.sh
   __vte_osc7
 fi
+
+[ -f $HOME/.playground/bin/playground ] && export PATH=$HOME/.playground/bin:$PATH
+
