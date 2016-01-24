@@ -37,10 +37,11 @@ zle -N zle-line-init
 alias cdu='cd-gitroot'
 
 alias ssh='TERM=xterm-256color ssh'
-if ! type lesspipe.sh > /dev/null; then
-	LESSOPEN="|/usr/local/bin/lesspipe.sh %s"; export LESSOPEN
+if type lesspipe.sh > /dev/null; then
+	LESSOPENLOC=`which lesspipe.sh`
+	LESSOPEN="|$LESSOPENLOC %s"; export LESSOPEN
 fi
 
-if ! type keychain > /dev/null; then
+if type keychain > /dev/null; then
 	eval `keychain --eval`
 fi
